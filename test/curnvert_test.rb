@@ -40,10 +40,10 @@ class CurnvertTest < MiniTest::Unit::TestCase
   # Should be created with an amount and a currency code
   def test_currency_created_with_amount_and_currency_code
     assert(true, Currency.new(100, "USD"))
-    # assert_raise(ArgumentError) { Currency.new(1, 2, 3) }
-    # assert_raise(ArgumentError) { Currency.new() }
-    # assert_raise(ArgumentError) { Currency.new("asdf", "USD") }
-    # what the hellllll
+    assert_raises(ArgumentError) { Currency.new(1, 2, 3) }
+    assert_raises(ArgumentError) { Currency.new() }
+    assert_raises(ArgumentError) { Currency.new("asdf", "USD") }
+    ## what the hellllll these are throwing "NoMethodError for assert_raise"
   end
 
 

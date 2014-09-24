@@ -10,6 +10,12 @@ class Currency
   attr_reader :amount, :code
 
   def initialize(amount, code)
+    if amount.class != Fixnum
+      raise ArgumentError, "First argument must be the amount as an integer"
+    end
+    if code.class != String
+      raise ArgumentError, "Second argument must be the currency code in string format"
+    end
     @amount = amount
     @code = code
   end
