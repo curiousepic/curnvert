@@ -16,7 +16,7 @@ class Currency
     if amount.class != Fixnum && amount.class != Float
       raise ArgumentError, "First argument must be the amount as an integer"
     end
-    if code.class != String
+    if code.class != Symbol
       raise ArgumentError, "Second argument must be the currency code in string format"
     end
     @amount = amount
@@ -55,4 +55,9 @@ end
 
 
 class CurrencyConverter
+  def initialize
+    rates = {
+    USD: 1.0, EUR: 0.74
+    }
+  end
 end
