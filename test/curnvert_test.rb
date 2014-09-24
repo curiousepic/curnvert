@@ -43,9 +43,7 @@ class CurnvertTest < MiniTest::Unit::TestCase
     assert_raises(ArgumentError) { Currency.new(1, 2, 3) }
     assert_raises(ArgumentError) { Currency.new() }
     assert_raises(ArgumentError) { Currency.new("asdf", "USD") }
-    ## what the hellllll these are throwing "NoMethodError for assert_raise"
   end
-
 
   # Should equal another Currency object with the same amount and currency code
   def test_two_currency_objects_with_same_arguments_are_equal
@@ -64,6 +62,16 @@ class CurnvertTest < MiniTest::Unit::TestCase
     (Currency.new(10000, "USD") - Currency.new(9933, "USD"))
     assert_equal Currency.new(67, "USD"),
     (Currency.new(9933, "USD") - Currency.new(10000, "USD"))
+  end
+
+  # Should raise a DifferentCurrencyCodeError when you try to add or subtract two Currency objects with different currency codes.
+  def test_raises_error_when_using_two_different_codes
+    assert_raises(DifferentCurrencyCodeError) do
+    Currency.new(52, "USD") + Currency.new(71, "ISK")
+    end
+    assert_raises(DifferentCurrencyCodeError) do
+    Currency.new(52, "USD") - Currency.new(71, "ISK")
+    end
   end
 
 end

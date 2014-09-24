@@ -6,6 +6,9 @@ class Curnvert
   end
 end
 
+class DifferentCurrencyCodeError < ArgumentError
+end
+
 class Currency
   attr_reader :amount, :code
 
@@ -27,15 +30,30 @@ class Currency
   end
 
   def +(other)
-    Currency.new((@amount + other.amount), @code)
+    if @code != other.code
+      raise DifferentCurrencyCodeError, "These currencies' codes are different"
+    else
+      Currency.new((@amount + other.amount), @code)
+    end
   end
 
   def -(other)
-    amounts = [@amount, other.amount]
-    amounts = amounts.sort
-    Currency.new((amounts.last - amounts.first), @code)
+    if @code != other.code
+      raise DifferentCurrencyCodeError, "These currencies' codes are different"
+    else
+      amounts = [@amount, other.amount]
+      amounts = amounts.sort
+      Currency.new((amounts.last - amounts.first), @code)
+    end
   end
 
+  # def check_codes(curr1, curr2)
+  #   if curr1 == curr2
+  #     true
+  #   else
+  #     raise DifferentCurrencyCodeError, "These currencies' codes are different"
+  #   end
+  # end
 
 end
 
