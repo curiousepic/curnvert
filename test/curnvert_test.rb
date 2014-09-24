@@ -65,6 +65,7 @@ class CurnvertTest < MiniTest::Unit::TestCase
   end
 
   # Should raise a DifferentCurrencyCodeError when you try to add or subtract two Currency objects with different currency codes.
+
   def test_raises_error_when_using_two_different_codes
     assert_raises(DifferentCurrencyCodeError) do
     Currency.new(52, "USD") + Currency.new(71, "ISK")
@@ -72,6 +73,13 @@ class CurnvertTest < MiniTest::Unit::TestCase
     assert_raises(DifferentCurrencyCodeError) do
     Currency.new(52, "USD") - Currency.new(71, "ISK")
     end
+  end
+
+  # Should be able to be multiplied by a Fixnum or Float and return a Currency object
+  def test_returns_currency_obj_when_multiplying_it_by_fixnum_or_float
+    assert_equal Currency.new(32,"USD"), (Currency.new(8, "USD") * 4)
+    assert_equal Currency.new(19.488,"USD"),
+    (Currency.new(6, "USD") * 3.248)
   end
 
 end

@@ -13,7 +13,7 @@ class Currency
   attr_reader :amount, :code
 
   def initialize(amount, code)
-    if amount.class != Fixnum
+    if amount.class != Fixnum && amount.class != Float
       raise ArgumentError, "First argument must be the amount as an integer"
     end
     if code.class != String
@@ -47,13 +47,9 @@ class Currency
     end
   end
 
-  # def check_codes(curr1, curr2)
-  #   if curr1 == curr2
-  #     true
-  #   else
-  #     raise DifferentCurrencyCodeError, "These currencies' codes are different"
-  #   end
-  # end
+  def *(fof)
+    Currency.new(@amount * fof, @code)
+  end
 
 end
 
