@@ -55,9 +55,17 @@ end
 
 
 class CurrencyConverter
+  attr_reader :rates
+
   def initialize
-    rates = {
-    USD: 1.0, EUR: 0.74
-    }
+    @rates = { USD: 1.0, EUR: 0.74 }
+  end
+
+  def convert(curr, new_code)
+    if new_code == curr.code
+      curr
+    # else
+    #   Currency.new(calculations_here, new_code)
+    end
   end
 end

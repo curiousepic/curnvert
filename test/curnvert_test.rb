@@ -83,8 +83,28 @@ class CurnvertTest < MiniTest::Unit::TestCase
   end
 
   # At first, just make this work with two currency codes and conversation rates, with one rate being 1.0 and the other being the conversation rate (like this: {USD: 1.0, EUR: 0.74})
-  # def test_a_hash_of_codes_and_rates_exist
-  #   assert_equal CurrencyConverter.new,
-  #   {}
+  def test_a_hash_of_codes_and_rates_exist
+    assert_equal CurrencyConverter.new.rates,
+    { USD: 1.0, EUR: 0.74 }
+  end
+
+  # Should be able to take a Currency object and a requested currency code that is the same currency code as the Currency object's and return a Currency object equal to the one passed in (that is, currency_converter.convert(Currency.new(1, :USD)) == Currency.new(1, :USD))
+  def test_conversion_to_same_currency_code
+    assert_equal Currency.new(1, :USD),
+    CurrencyConverter.new.convert(Currency.new(1, :USD), :USD)
+    assert_equal Currency.new(7, :EUR),
+    CurrencyConverter.new.convert(Currency.new(7, :EUR), :EUR)
+  end
+
+  # Should be able to take a Currency object that has one currency code it knows and a requested currency code and return a new Currency object with the right amount in the new currency code
+  # def test_conversion_to_other_currency_codes_with_correct_amount
+  #   assert equal Currency.new(1.0, :USD),
+  #   CurrencyConverter.new.convert(Currency.new(0.74, :EUR), :USD)
+  #   assert equal Currency.new(0.74, :EUR),
+  #   CurrencyConverter.new.convert(Currency.new(1.0, :USD), :EUR)
+  #   assert equal Currency.new(62.7964, :EUR),
+  #   CurrencyConverter.new.convert(Currency.new(84.86, :USD), :EUR)
+  #
+  # end
 
 end
