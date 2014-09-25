@@ -14,10 +14,10 @@ class Currency
 
   def initialize(amount, code)
     if amount.class != Fixnum && amount.class != Float
-      raise ArgumentError, "First argument must be the amount as an integer"
+      raise ArgumentError, "First argument must be the amount as an integer or decimal"
     end
     if code.class != Symbol
-      raise ArgumentError, "Second argument must be the currency code in string format"
+      raise ArgumentError, "Second argument must be the currency code in symbol format"
     end
     @amount = amount
     @code = code
@@ -64,8 +64,11 @@ class CurrencyConverter
   def convert(curr, new_code)
     if new_code == curr.code
       curr
-    # else
-    #   Currency.new(calculations_here, new_code)
+    else
+      curr_rate = @rates[curr.code]
+      new_rate = @rates[new_code]
+      actual_rate = new_rate / curr_rate
+      Currency.new((curr.amount * actual_rate), new_code)
     end
   end
 end

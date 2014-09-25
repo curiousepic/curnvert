@@ -97,14 +97,18 @@ class CurnvertTest < MiniTest::Unit::TestCase
   end
 
   # Should be able to take a Currency object that has one currency code it knows and a requested currency code and return a new Currency object with the right amount in the new currency code
-  # def test_conversion_to_other_currency_codes_with_correct_amount
-  #   assert equal Currency.new(1.0, :USD),
-  #   CurrencyConverter.new.convert(Currency.new(0.74, :EUR), :USD)
-  #   assert equal Currency.new(0.74, :EUR),
-  #   CurrencyConverter.new.convert(Currency.new(1.0, :USD), :EUR)
-  #   assert equal Currency.new(62.7964, :EUR),
-  #   CurrencyConverter.new.convert(Currency.new(84.86, :USD), :EUR)
-  #
+  def test_conversion_to_other_currency_codes_with_correct_amount
+    assert_equal Currency.new(1.0, :USD),
+    CurrencyConverter.new.convert(Currency.new(0.74, :EUR), :USD)
+    assert_equal Currency.new(0.74, :EUR),
+    CurrencyConverter.new.convert(Currency.new(1.0, :USD), :EUR)
+    assert_equal Currency.new(62.7964, :EUR),
+    CurrencyConverter.new.convert(Currency.new(84.86, :USD), :EUR)
+  end
+
+  # Should be able to be created with a Hash of three or more currency codes and conversion rates
+  # def test_can_be_created_with_three_or_more_code_rate_pairs
+  #   assert
   # end
 
 end
